@@ -218,7 +218,6 @@ def check_password(correct_password):
     return decorator
 
 
-# Пример использования
 @check_password('secret123')
 def make_burger(typeOfMeat, withOnion=False, withTomato=True):
     print(f"Готовим бургер с мясом {typeOfMeat}")
@@ -229,7 +228,6 @@ def make_burger(typeOfMeat, withOnion=False, withTomato=True):
     return "Бургер готов!"
 
 
-# Тестирование
 try:
     print(make_burger("говядина", withOnion=True))
 except PermissionError as e:
