@@ -1,58 +1,84 @@
-#Задание 1 map filter
+# Задание 1 map filter
 list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15, 35, 65, 99, 120]
 print(list(filter(lambda elem: elem < 5, list1)))
-print(list(map(lambda x: x/2, list1)))
-print(list(map(lambda x: x/2, filter(lambda x: x > 17, list1))))
-print(sum(list(map(lambda x: x**2, filter(lambda x: 9 < x < 100 and x%9 == 0, list1)))))
-#Задание 2 generator
+print(list(map(lambda x: x / 2, list1)))
+print(list(map(lambda x: x / 2, filter(lambda x: x > 17, list1))))
+print(sum(list(map(lambda x: x ** 2, filter(lambda x: 9 < x < 100 and x % 9 == 0, list1)))))
+# Задание 2 generator
 from math import factorial
+
+
 def factorials(n):
-    x = [factorial(i) for i in range(1, n+1)]
+    x = [factorial(i) for i in range(1, n + 1)]
     yield x
+
+
 print(*list(factorials(7)))
-#Задание 3
+
+
+# Задание 3
 def fibonacci(n):
     f1, f2 = 0, 1
     for i in range(n):
         f1, f2 = f2, f1 + f2
-        yield f1**2
+        yield f1 ** 2
+
+
 print(*fibonacci(7))
-#Задание 4
+
+
+# Задание 4
 def generator():
-    for i in range(ord('а'), ord('я')+1):
+    for i in range(ord('а'), ord('я') + 1):
         yield chr(i)
+
+
 print(*generator())
-#Задание 5
-for i in range(ord('а'), ord('я')+1):
+# Задание 5
+for i in range(ord('а'), ord('я') + 1):
     print(chr(i), end=' ')
-#Задание 6 function as object
+
+
+# Задание 6 function as object
 def arithmetic_operation(operation):
     if operation == '+':
-        return lambda x,y: x+y
+        return lambda x, y: x + y
     elif operation == '-':
-        return lambda x,y: x-y
+        return lambda x, y: x - y
     elif operation == '*':
-        return lambda x,y: x*y
+        return lambda x, y: x * y
     elif operation == '/':
-        return lambda x,y: x/y
+        return lambda x, y: x / y
+
+
 operation = arithmetic_operation('+')
 print(operation(1, 4))
-#Задание 7
+
+
+# Задание 7
 def same_by(characteristic, objects):
     return len(set(map(characteristic, objects))) == 1 if objects else True
+
+
 values = [0, 2, 10, 6]
 if same_by(lambda x: x % 2, values):
     print('same')
 else:
     print('different')
-#Задание 8
+
+
+# Задание 8
 def print_operation_table(operation, num_rows=9, num_columns=9):
-    for i in range(1, num_rows+1):
-        for j in range(1, num_columns+1):
+    for i in range(1, num_rows + 1):
+        for j in range(1, num_columns + 1):
             print(f'{operation(i, j):<4}', end=' ')
             print()
-print_operation_table(lambda x, y: x*y, 5)
-#Задание 9
+
+
+print_operation_table(lambda x, y: x * y, 5)
+
+
+# Задание 9
 def ask_password(login: str, password: str, success: callable, failure: callable):
     count_v, count_c, pos_c = 0, 0, 0
     for pos, symbol in enumerate(password.lower()):
@@ -68,20 +94,23 @@ def ask_password(login: str, password: str, success: callable, failure: callable
         failure(login, "Wrong consonants")
     else:
         success(login)
+
+
 ask_password("login", "1",
-    lambda login: print(f"SUCCES: #{login}"),
-    lambda login, message: print(f"FAILURE: #{login} | info: {message}"))
-#Задание 10 standard features
+             lambda login: print(f"SUCCES: #{login}"),
+             lambda login, message: print(f"FAILURE: #{login} | info: {message}"))
+# Задание 10 standard features
 print(*sorted(input().split(), key=str.lower))
-#Задание 11
+# Задание 11
 list2 = [3, 6, -8, 2, -78, 1, 23, -45, 9]
 list2.sort()
 print(list2)
-#Задание 12
+# Задание 12
 my_list = [[4, 5], [0, 2], [1, 2], [1, 1], [5, 5], [7, 0], [0, 2], [1, 5], [0, 0]]
 print(sorted(my_list, key=lambda x: (x[1] ** 2 + x[0] ** 2) ** 1 / 2))
-#Задание 13
+# Задание 13
 import sys
+
 t = '''\
     64 33 79 56 78 70 45 71 82 3
     96 27 8 36 72 14 91 10 21 65
@@ -94,7 +123,7 @@ t = '''\
     58 37 32 29 10 19 53 46 95 19
     41 24 95 47 58 17 74 69 62 4 '''
 print("0" in sys.stdin.read().split())
-#Задание 14
+# Задание 14
 with open('text.txt', 'r', encoding='utf-8') as f:
     lines = f.readlines()
 lines = list(map(str.strip, lines))
@@ -104,13 +133,15 @@ for i, line in enumerate(lines):
     elif line[-1] == '.':
         end = i
         break
-print(lines[start+1: end+1])
-#Задание 15
+print(lines[start + 1: end + 1])
+# Задание 15
 import sys
 from functools import reduce
 
+
 def find_min_lex(iterator):
     return reduce(lambda x, y: x if x < y else y, iterator)
+
 
 lines = []
 for line in sys.stdin:
@@ -123,13 +154,15 @@ if lines:
     print(find_min_lex(lines))
 else:
     print("")
-#Задание 16
+# Задание 16
 import sys
 from functools import reduce
 from math import gcd
 
+
 def compute_gcd(numbers):
     return reduce(lambda x, y: gcd(x, y), numbers)
+
 
 numbers = []
 for line in sys.stdin:
@@ -151,7 +184,9 @@ if numbers:
 else:
     print("Ошибка: не введено ни одного числа", file=sys.stderr)
     sys.exit(1)
-#Задание 17
+
+
+# Задание 17
 def check_password(foo):
     def check():
         password = input()
@@ -159,11 +194,16 @@ def check_password(foo):
             print('В доступе отказано')
             return None
         foo()
+
     return check()
+
+
 @check_password
 def hi():
     print('Hi')
-#Задание 18
+
+
+# Задание 18
 def check_password(correct_password):
     def decorator(func):
         def wrapper(*args, **kwargs):
@@ -172,8 +212,11 @@ def check_password(correct_password):
                 return func(*args, **kwargs)
             else:
                 raise PermissionError("Неверный пароль! Доступ запрещён.")
+
         return wrapper
+
     return decorator
+
 
 # Пример использования
 @check_password('secret123')
@@ -185,12 +228,15 @@ def make_burger(typeOfMeat, withOnion=False, withTomato=True):
         print("Добавляем помидор")
     return "Бургер готов!"
 
+
 # Тестирование
 try:
     print(make_burger("говядина", withOnion=True))
 except PermissionError as e:
     print(e)
-#Задание 19
+
+
+# Задание 19
 def cached(func):
     cache = {}
 
@@ -205,12 +251,14 @@ def cached(func):
 
     return wrapper
 
+
 @cached
 def fib(n):
     if n == 1 or n == 2:
         return 1
     else:
         return fib(n - 1) + fib(n - 2)
+
 
 print(fib(5))
 print(fib(5))
